@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HHYVideoCapture" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqK-Jb-pPe">
+                                <rect key="frame" x="103" y="236" width="63" height="30"/>
+                                <state key="normal" title="开始采集"/>
+                                <connections>
+                                    <action selector="startCapture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ntU-0M-tLR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dgt-zk-7pH">
+                                <rect key="frame" x="237" y="236" width="62" height="30"/>
+                                <state key="normal" title="停止采集"/>
+                                <connections>
+                                    <action selector="stopCapture:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kqu-Fo-hsE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFl-L9-ZTG">
+                                <rect key="frame" x="96" y="327" width="77" height="30"/>
+                                <state key="normal" title="切换摄像头"/>
+                                <connections>
+                                    <action selector="rorateCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rib-U6-DH1"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="EFl-L9-ZTG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="96" id="4af-3X-jqm"/>
+                            <constraint firstItem="EFl-L9-ZTG" firstAttribute="centerX" secondItem="CqK-Jb-pPe" secondAttribute="centerX" id="SQA-sj-ZNv"/>
+                            <constraint firstItem="dgt-zk-7pH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="192" id="e9h-oS-x6R"/>
+                            <constraint firstItem="dgt-zk-7pH" firstAttribute="baseline" secondItem="CqK-Jb-pPe" secondAttribute="baseline" id="eFI-9S-LwJ"/>
+                            <constraint firstItem="EFl-L9-ZTG" firstAttribute="top" secondItem="CqK-Jb-pPe" secondAttribute="bottom" constant="61" id="ksc-r8-EFe"/>
+                            <constraint firstItem="dgt-zk-7pH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="CqK-Jb-pPe" secondAttribute="trailing" constant="8" symbolic="YES" id="oau-8f-AFK"/>
+                            <constraint firstItem="CqK-Jb-pPe" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="103" id="s7M-HF-plF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dgt-zk-7pH" secondAttribute="trailing" constant="115" id="ytb-Ee-LH4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="93.75"/>
+        </scene>
+    </scenes>
+</document>
