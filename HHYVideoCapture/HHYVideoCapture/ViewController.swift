@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     fileprivate var videoOutput: AVCaptureVideoDataOutput?
     fileprivate var previewLayer: AVCaptureVideoPreviewLayer?
     fileprivate var videoInput: AVCaptureDeviceInput?
+    fileprivate var movieOutput: AVCaptureMovieFileOutput?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,9 @@ class ViewController: UIViewController {
 extension ViewController {
     @IBAction func startCapture(_ sender: UIButton) {
         session.startRunning()
+        // 录制视频,并写入文件
+        setupMovieFileOutput()
+        
         guard let previewLayer = previewLayer else {
             return
         }
@@ -41,6 +45,7 @@ extension ViewController {
     }
     
     @IBAction func stopCapture(_ sender: UIButton) {
+        movieOutput?.stopRecording()
         session.stopRunning()
         previewLayer?.removeFromSuperlayer()
     }
@@ -135,6 +140,24 @@ extension ViewController {
         // 3.将图层添加到控制器的view的layer中
         self.previewLayer = previewLayer
     }
+    
+    fileprivate func setupMovieFileOutput() {
+        // 1.创建写入文件的输出
+        let fileOutput = AVCaptureMovieFileOutput()
+        self.movieOutput = fileOutput
+        
+        let connection = fileOutput.connection(with: .video)
+        connection?.automaticallyAdjustsVideoMirroring = true
+        
+        if session.canAddOutput(fileOutput) {
+            session.addOutput(fileOutput)
+        }
+        
+        // 2.直接开始写入文件
+        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/abc.mp4"
+        let fileURL = URL(fileURLWithPath: filePath)
+        fileOutput.startRecording(to: fileURL, recordingDelegate: self)
+    }
 }
 
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
@@ -153,5 +176,16 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
         } else {
             print("丢弃的一帧##音频数据##")
         }
+    }
+}
+
+// MARK: - 通过代理监听写入文件,以及结束写入文件
+extension ViewController: AVCaptureFileOutputRecordingDelegate {
+    func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+        print("开始写入")
+    }
+    
+    func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+        print("结束写入")
     }
 }

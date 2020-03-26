@@ -13,9 +13,11 @@
 		35D0EB80242B93C9005AC6B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35D0EB7E242B93C9005AC6B7 /* Main.storyboard */; };
 		35D0EB82242B93CA005AC6B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35D0EB81242B93CA005AC6B7 /* Assets.xcassets */; };
 		35D0EB85242B93CA005AC6B7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35D0EB83242B93CA005AC6B7 /* LaunchScreen.storyboard */; };
+		A8AFC82884585828C1C68FE1 /* Pods_HHYVideoCapture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 779D80067471CDCF50F439D6 /* Pods_HHYVideoCapture.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1ABC8A33249FEAA9E41BDD8B /* Pods-HHYVideoCapture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHYVideoCapture.release.xcconfig"; path = "Target Support Files/Pods-HHYVideoCapture/Pods-HHYVideoCapture.release.xcconfig"; sourceTree = "<group>"; };
 		35D0EB75242B93C9005AC6B7 /* HHYVideoCapture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHYVideoCapture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35D0EB78242B93C9005AC6B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35D0EB7A242B93C9005AC6B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +26,8 @@
 		35D0EB81242B93CA005AC6B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35D0EB84242B93CA005AC6B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35D0EB86242B93CA005AC6B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		779D80067471CDCF50F439D6 /* Pods_HHYVideoCapture.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HHYVideoCapture.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E842D4AF7188BD6A8E59D44C /* Pods-HHYVideoCapture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHYVideoCapture.debug.xcconfig"; path = "Target Support Files/Pods-HHYVideoCapture/Pods-HHYVideoCapture.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +35,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8AFC82884585828C1C68FE1 /* Pods_HHYVideoCapture.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1F66F447BADC6F0EC6267586 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E842D4AF7188BD6A8E59D44C /* Pods-HHYVideoCapture.debug.xcconfig */,
+				1ABC8A33249FEAA9E41BDD8B /* Pods-HHYVideoCapture.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		35D0EB6C242B93C9005AC6B7 = {
 			isa = PBXGroup;
 			children = (
 				35D0EB77242B93C9005AC6B7 /* HHYVideoCapture */,
 				35D0EB76242B93C9005AC6B7 /* Products */,
+				1F66F447BADC6F0EC6267586 /* Pods */,
+				4449B0BA4A3B9519A73792E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +84,14 @@
 			path = HHYVideoCapture;
 			sourceTree = "<group>";
 		};
+		4449B0BA4A3B9519A73792E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				779D80067471CDCF50F439D6 /* Pods_HHYVideoCapture.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 35D0EB89242B93CA005AC6B7 /* Build configuration list for PBXNativeTarget "HHYVideoCapture" */;
 			buildPhases = (
+				803C7A24763E249BE6CAA8F8 /* [CP] Check Pods Manifest.lock */,
 				35D0EB71242B93C9005AC6B7 /* Sources */,
 				35D0EB72242B93C9005AC6B7 /* Frameworks */,
 				35D0EB73242B93C9005AC6B7 /* Resources */,
+				7C62F45C4B5CAF07B572879B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -132,6 +159,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7C62F45C4B5CAF07B572879B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HHYVideoCapture/Pods-HHYVideoCapture-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HHYVideoCapture/Pods-HHYVideoCapture-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HHYVideoCapture/Pods-HHYVideoCapture-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		803C7A24763E249BE6CAA8F8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HHYVideoCapture-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		35D0EB71242B93C9005AC6B7 /* Sources */ = {
@@ -282,6 +351,7 @@
 		};
 		35D0EB8A242B93CA005AC6B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E842D4AF7188BD6A8E59D44C /* Pods-HHYVideoCapture.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -301,6 +371,7 @@
 		};
 		35D0EB8B242B93CA005AC6B7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1ABC8A33249FEAA9E41BDD8B /* Pods-HHYVideoCapture.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
