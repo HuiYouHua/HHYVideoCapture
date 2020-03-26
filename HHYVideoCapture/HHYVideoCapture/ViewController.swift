@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     fileprivate var videoInput: AVCaptureDeviceInput?
     fileprivate var movieOutput: AVCaptureMovieFileOutput?
     
+    fileprivate var encoder: VideoEncoder = VideoEncoder()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,7 +38,7 @@ extension ViewController {
     @IBAction func startCapture(_ sender: UIButton) {
         session.startRunning()
         // 录制视频,并写入文件
-        setupMovieFileOutput()
+//        setupMovieFileOutput()
         
         guard let previewLayer = previewLayer else {
             return
@@ -45,6 +47,7 @@ extension ViewController {
     }
     
     @IBAction func stopCapture(_ sender: UIButton) {
+        encoder.endEncode()
         movieOutput?.stopRecording()
         session.stopRunning()
         previewLayer?.removeFromSuperlayer()
@@ -101,8 +104,14 @@ extension ViewController {
         output.setSampleBufferDelegate(self, queue: queue)
         videoOutput = output
         
+
+        
         // 3.添加输入&输出
         addInputOutputToSession(input, output)
+        
+        // 4.设置录制方向, 必须在添加输入输出之后设置,否则connection没有对象
+        let connection = output.connection(with: .video)
+        connection?.videoOrientation = .portrait
         
     }
     
@@ -114,13 +123,14 @@ extension ViewController {
         // 2.创建输出
         let output = AVCaptureAudioDataOutput()
         output.setSampleBufferDelegate(self, queue: DispatchQueue.global())
-        
+
         // 3.添加输入&输出
         addInputOutputToSession(input, output)
     }
     
     private func addInputOutputToSession(_ input: AVCaptureInput, _ output: AVCaptureOutput) {
         session.beginConfiguration()
+        
         if session.canAddInput(input) {
             session.addInput(input)
         }
@@ -160,9 +170,10 @@ extension ViewController {
     }
 }
 
+// MARK: - 视频采集代理
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        
+        encoder.encode(sampleBuffer)
         if videoOutput?.connection(with: .video) == connection {
             print("采集到一帧**视频数据**")
         } else {

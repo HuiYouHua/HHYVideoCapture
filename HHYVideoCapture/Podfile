@@ -6,6 +6,6 @@ target 'HHYVideoCapture' do
   use_frameworks!
 
   # Pods for HHYVideoCapture
-pod 'GPUImage'
+#pod 'GPUImage'
 
 end
