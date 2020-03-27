@@ -718,7 +718,7 @@
 				78D8EB56242CAA37008E56C2 /* HHYVideoCapture-Bridging-Header.h */,
 				78D8EB5D242DABBC008E56C2 /* 软编码 */,
 				78D8EB5A242DABBC008E56C2 /* 硬编码 */,
-				78D8E965242CAA16008E56C2 /* Source */,
+				78D8E965242CAA16008E56C2 /* GPUImage */,
 				35D0EB7E242B93C9005AC6B7 /* Main.storyboard */,
 				35D0EB81242B93CA005AC6B7 /* Assets.xcassets */,
 				35D0EB83242B93CA005AC6B7 /* LaunchScreen.storyboard */,
@@ -740,7 +740,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		78D8E965242CAA16008E56C2 /* Source */ = {
+		78D8E965242CAA16008E56C2 /* GPUImage */ = {
 			isa = PBXGroup;
 			children = (
 				78D8E966242CAA16008E56C2 /* GPUImageBuffer.h */,
@@ -1064,7 +1064,7 @@
 				78D8EAB0242CAA17008E56C2 /* GLProgram.h */,
 				78D8EAB1242CAA17008E56C2 /* GPUImageDarkenBlendFilter.m */,
 			);
-			path = Source;
+			path = GPUImage;
 			sourceTree = "<group>";
 		};
 		78D8EA02242CAA16008E56C2 /* iOS */ = {

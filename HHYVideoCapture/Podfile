@@ -7,5 +7,5 @@ target 'HHYVideoCapture' do
 
   # Pods for HHYVideoCapture
 #pod 'GPUImage'
-
+pod 'LFLiveKit'
 end
