@@ -17,10 +17,27 @@ class ViewController: UIViewController {
     fileprivate var videoInput: AVCaptureDeviceInput?
     fileprivate var movieOutput: AVCaptureMovieFileOutput?
     
-    fileprivate var encoder: VideoEncoder = VideoEncoder()
+    fileprivate var encoder: VideoEncoder = VideoEncoder()  // 硬编码
+    /**
+     FFMpeg+x.264编译
+     1.软编码需要导入FFMpeg音视频处理库和X264视频编码函数库
+     2.添加依赖库: libiconv.dylib/libz.dylib/libbz2.dylib/CoreMedia.framework/AVFoundation.framework
+     3.设置header search path库头文件路径:$(SRCROOT)/HHYVideoCapture/软编码/FFmpeg-iOS/include
+     4.设置bitcode为no
+     
+     注意:软编码需要注意视频采集的像素大小和编码视频大小要保持一致
+     而硬编码则没有关系
+     */
+    fileprivate var ffmpegEncoder: X264Manager = X264Manager()  // 软编码
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // 0.初始化FFMPeg编码器
+        session.sessionPreset = AVCaptureSession.Preset.vga640x480
+        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last! + "/abc.264"
+        ffmpegEncoder.setFileSavedPath(filePath)
+        ffmpegEncoder.setX264ResourceWithVideoWidth(480, height: 640, bitrate: 1500000)
         
         // 1.初始化视频的输入&输出
         setupVideoInputOutput()
@@ -47,10 +64,14 @@ extension ViewController {
     }
     
     @IBAction func stopCapture(_ sender: UIButton) {
-        encoder.endEncode()
+
         movieOutput?.stopRecording()
         session.stopRunning()
         previewLayer?.removeFromSuperlayer()
+        
+        // 编码结束释放资源
+        ffmpegEncoder.freeX264Resource()
+//        encoder.endEncode()
     }
     
     @IBAction func rorateCamera(_ sender: UIButton) {
@@ -173,7 +194,8 @@ extension ViewController {
 // MARK: - 视频采集代理
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
-        encoder.encode(sampleBuffer)
+//        encoder.encode(sampleBuffer)
+        ffmpegEncoder.encoder(toH264: sampleBuffer)
         if videoOutput?.connection(with: .video) == connection {
             print("采集到一帧**视频数据**")
         } else {

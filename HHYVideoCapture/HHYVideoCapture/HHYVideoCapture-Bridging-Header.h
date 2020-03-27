@@ -12,5 +12,6 @@
 
 #import "GPUImage.h"
 #import "VideoEncoder.h"
+#import "X264Manager.h"
 
 #endif /* HHYVideoCapture_Bridging_Header_h */
