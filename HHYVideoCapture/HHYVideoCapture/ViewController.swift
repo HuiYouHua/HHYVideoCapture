@@ -229,6 +229,7 @@ extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptur
     }
 }
 
+// 这里需要注意:如果要将视频写入文件,那么视频采集的代理方法就不会执行了,它会自动将sampleBuffer编码写入文件
 // MARK: - 通过代理监听写入文件,以及结束写入文件
 extension ViewController: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
