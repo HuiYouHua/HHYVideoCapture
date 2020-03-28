@@ -13,3 +13,15 @@
 
 
 
+视频软编码：
+
+​     FFMpeg+x.264编译
+
+1. 软编码需要导入FFMpeg音视频处理库和X264视频编码函数库
+2. 添加依赖库: libiconv.dylib/libz.dylib/libbz2.dylib/CoreMedia.framework/AVFoundation.framework
+3. 设置header search path库头文件路径:$(SRCROOT)/HHYVideoCapture/软编码/FFmpeg-iOS/include
+4. 设置bitcode为no
+5. 注意:软编码需要注意视频采集的像素大小和编码视频大小要保持一致
+
+​     而硬编码则没有关系
+

@@ -17,6 +17,21 @@ class ViewController: UIViewController {
     fileprivate var videoInput: AVCaptureDeviceInput?
     fileprivate var movieOutput: AVCaptureMovieFileOutput?
     
+    fileprivate var fileURL: URL {
+        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/abc.mp4"
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            do {
+                try FileManager.default.removeItem(atPath: filePath)
+            } catch {
+                print(error)
+            }
+        }
+        
+        let fileURL = URL(fileURLWithPath: filePath)
+        return fileURL
+    }
+    
     fileprivate var encoder: VideoEncoder = VideoEncoder()  // 硬编码
     /**
      FFMpeg+x.264编译
@@ -48,15 +63,20 @@ class ViewController: UIViewController {
         // 3.初始化一个预览图层
         setupPreviewLayer()
         
+        // 4.初始化视频输出
+        setupMovieFileOutput()
     }
 }
 
 extension ViewController {
     @IBAction func startCapture(_ sender: UIButton) {
+        // 1.开始采集视频
         session.startRunning()
-        // 录制视频,并写入文件
-//        setupMovieFileOutput()
         
+        // 2.直接开始写入文件
+        movieOutput?.startRecording(to: fileURL, recordingDelegate: self)
+
+        // 3.添加预览图层
         guard let previewLayer = previewLayer else {
             return
         }
@@ -64,13 +84,17 @@ extension ViewController {
     }
     
     @IBAction func stopCapture(_ sender: UIButton) {
-
+        // 1.停止写入文件
         movieOutput?.stopRecording()
+        
+        // 2.停止采集视频
         session.stopRunning()
+        
+        // 3.移除预览图层
         previewLayer?.removeFromSuperlayer()
         
-        // 编码结束释放资源
-        ffmpegEncoder.freeX264Resource()
+        // 4.编码结束释放资源
+//        ffmpegEncoder.freeX264Resource()
 //        encoder.endEncode()
     }
     
@@ -167,8 +191,6 @@ extension ViewController {
         
         // 2.设置preview的属性
         previewLayer.frame = view.bounds
-    
-        // 3.将图层添加到控制器的view的layer中
         self.previewLayer = previewLayer
     }
     
@@ -183,11 +205,6 @@ extension ViewController {
         if session.canAddOutput(fileOutput) {
             session.addOutput(fileOutput)
         }
-        
-        // 2.直接开始写入文件
-        let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first! + "/abc.mp4"
-        let fileURL = URL(fileURLWithPath: filePath)
-        fileOutput.startRecording(to: fileURL, recordingDelegate: self)
     }
 }
 
@@ -195,7 +212,7 @@ extension ViewController {
 extension ViewController: AVCaptureVideoDataOutputSampleBufferDelegate, AVCaptureAudioDataOutputSampleBufferDelegate {
     func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
 //        encoder.encode(sampleBuffer)
-        ffmpegEncoder.encoder(toH264: sampleBuffer)
+//        ffmpegEncoder.encoder(toH264: sampleBuffer)
         if videoOutput?.connection(with: .video) == connection {
             print("采集到一帧**视频数据**")
         } else {
